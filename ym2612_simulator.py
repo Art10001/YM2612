@@ -1,7 +1,7 @@
 import numpy as np
 import wave
 import pyaudio
-import keyboard
+from pynput import keyboard
 
 class YM2612Simulator:
     def __init__(self, sample_rate=44100):
@@ -35,16 +35,23 @@ def main():
     print("Press 'a' to 'g' to play notes.")
     print("Press '1' to '5' to change duration.")
 
-    while True:
-        if keyboard.is_pressed('q'):
-            break
-        for key in 'abcdefg':
-            if keyboard.is_pressed(key):
-                frequency = 440.0 * (2 ** ((ord(key) - ord('a')) / 12.0))
+    def on_press(key):
+        try:
+            if key.char in 'abcdefg':
+                frequency = 440.0 * (2 ** ((ord(key.char) - ord('a')) / 12.0))
                 simulator.play_tone(frequency, simulator.duration)
-        for key, duration in zip('12345', [0.1, 0.2, 0.5, 1.0, 2.0]):
-            if keyboard.is_pressed(key):
-                simulator.duration = duration
+            elif key.char in '12345':
+                durations = {'1': 0.1, '2': 0.2, '3': 0.5, '4': 1.0, '5': 2.0}
+                simulator.duration = durations[key.char]
+        except AttributeError:
+            pass
+
+    def on_release(key):
+        if key == keyboard.Key.esc:
+            return False
+
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()
 
     simulator.save_to_wav('output.wav')
     print("Audio saved to output.wav")
