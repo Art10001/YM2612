@@ -31,7 +31,7 @@ class YM2612Simulator:
 def main():
     simulator = YM2612Simulator()
 
-    print("Press 'q' to quit.")
+    print("Press 'q' to quit (or 'Esc' to stop the listener).")
     print("Press 'a' to 'g' to play notes.")
     print("Press '1' to '5' to change duration.")
 
@@ -47,12 +47,12 @@ def main():
             pass
 
     def on_release(key):
-        if key == keyboard.Key.esc:
+        if key == keyboard.Key.esc or (hasattr(key, 'char') and key.char == 'q'):
             return False
 
     listener = keyboard.Listener(on_press=on_press, on_release=on_release)
-    listener.start()
-    listener.join()
+    with listener:
+        listener.join()
 
     simulator.save_to_wav('output.wav')
     print("Audio saved to output.wav")
