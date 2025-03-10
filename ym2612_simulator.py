@@ -50,8 +50,9 @@ def main():
         if key == keyboard.Key.esc:
             return False
 
-    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-        listener.join()
+    listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+    listener.start()
+    listener.join()
 
     simulator.save_to_wav('output.wav')
     print("Audio saved to output.wav")
