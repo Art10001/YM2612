@@ -11,4 +11,4 @@ The various wav files are output examples.
 
 speaker.py emits to your speaker. However, it sounds a bit screechy compared to the wav outputs.
 
-Tools used: Aider, OpenRouter chat for fm2.py... mostly by Claude Sonnet 3.7, the jump from fm.py to fm2.py was achieved by DeepSeek R1 though
+Tools used: Aider, OpenRouter chat for fm2.py... mostly by Claude Sonnet 3.7, the jump from fm.py to fm2.py was achieved by DeepSeek R1 though, as well as speaker.py
