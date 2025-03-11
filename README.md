@@ -5,4 +5,10 @@ Yamaha YM2612 emulation attempt in python/c++. This is so that i dont need to us
 fm.py writes to a wav based on what's hardcoded in it.
 `ym2612_simulator.py` currently crashes and does not output. It was made with 4o.
 
+The various wav files are output examples.
+
+3fm.py is for 444 Hz. `4_639.py` is for 639 Hz.
+
+speaker.py emits to your speaker. However, it sounds a bit screechy compared to the wav outputs.
+
 Tools used: Aider, OpenRouter chat for fm2.py... mostly by Claude Sonnet 3.7, the jump from fm.py to fm2.py was achieved by DeepSeek R1 though
